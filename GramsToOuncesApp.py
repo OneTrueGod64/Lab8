@@ -1,53 +1,44 @@
-import os
-import pygubu
-
+# CelsiusToFahrenheitApp.py
 import tkinter as tk
-import tkinter.messagebox as mb
-
-PROJECT_PATH = os.path.dirname(__file__)
-PROJECT_UI = os.path.join(PROJECT_PATH, "grams_to_ounces.ui")
+import tkinter.messagebox as messagebox
 
 
-class GramsToOuncesApp:
-    GRAMS_PER_OUNCE = 28.3495
+class CelsiusToFahrenheitApp:
+    def __init__(self, master=None):
+        self.master = master
+        self.create_widgets()
 
-    # This class implements a simple calculator to convert grams to ounces.
-    # It can either be run as a stand-alone app (run GramsToOuncesApp.py directly)
-    # or within a tabbed notebook (run main.py and select the Grams to Ounces tab).
+    def create_widgets(self):
+        self.input_label = tk.Label(self.master, text="Celsius:")
+        self.input_label.grid(row=0, column=0)
 
-    def __init__(self, master):
+        self.input_entry = tk.Entry(self.master)
+        self.input_entry.grid(row=0, column=1)
 
-        # Boilerplate to build the tkinter interface based on grams_to_ounces.ui
-        self.__builder = builder = pygubu.Builder()
-        builder.add_resource_path(PROJECT_PATH)
-        builder.add_from_file(PROJECT_UI)
-        self.__mainwindow = builder.get_object('top_frame', master)
-        builder.connect_callbacks(self)
+        self.calculate_button = tk.Button(self.master, text="Convert", command=self.calculate)
+        self.calculate_button.grid(row=1, column=0, columnspan=2)
 
-        # Save these two UI elements as properties so that we can access them when
-        # the user clicks on the calculate button.
-        self.__grams_entry = builder.get_object('grams_entry', master)
-        self.__ounces_entry_variable = builder.get_variable('ounces_entry_variable')
+        self.result_label = tk.Label(self.master, text="Fahrenheit:")
+        self.result_label.grid(row=2, column=0)
+
+        self.result = tk.StringVar()
+        self.result_entry = tk.Entry(self.master, textvariable=self.result, state='readonly')
+        self.result_entry.grid(row=2, column=1)
 
     def calculate(self):
-        # Convert grams to ounces. If there's an error, display an error message.
         try:
-            grams = float(self.__grams_entry.get())
-            ounces = grams / self.GRAMS_PER_OUNCE
-            self.__ounces_entry_variable.set("{:.2f} ounces".format(ounces))
+            celsius = float(self.input_entry.get())
+            fahrenheit = celsius * 9 / 5 + 32
+            self.result.set(f"{fahrenheit} F")
         except ValueError:
-            mb.showerror(title="Error Calculating Ounces!", message="Grams must be a decimal number. Please try again.")
+            messagebox.showerror("Error", "Please enter a valid number.")
 
     def get_top_frame(self):
-        # Return the top frame for the app so that it can be displayed in a tabbed notebook.
-        return self.__mainwindow
-
-    def run(self):
-        self.__mainwindow.mainloop()
+        return self.master
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     root = tk.Tk()
-    app = GramsToOuncesApp(root)
-    app.run()
+    app = CelsiusToFahrenheitApp(root)
+    root.mainloop()
 
