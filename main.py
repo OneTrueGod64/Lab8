@@ -5,6 +5,7 @@ from AboutApp import AboutApp
 # Import the CelsiusToFahrenheitApp class
 from CelsiusToFahrenheitApp import CelsiusToFahrenheitApp
 
+
 class MainApp:
     def __init__(self, master):
         tk.Grid.columnconfigure(master, 0, weight=1)
@@ -28,6 +29,7 @@ class MainApp:
 
     def run(self):
         self.__mainwindow.mainloop()
+
 
 if __name__ == '__main__':
     root = tk.Tk()
