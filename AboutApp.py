@@ -35,4 +35,3 @@ if __name__ == '__main__':
     root = tk.Tk()
     app = AboutApp(root)
     app.run()
-
