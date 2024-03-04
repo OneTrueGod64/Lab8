@@ -40,19 +40,19 @@
         </child>
         <child>
           <object class="ttk.Label" id="label8">
-            <property name="text" translatable="yes">and a Grams to Ounces Calculator.	</property>
+            <property name="text" translatable="yes">and a Celsius to Fahrenheit Calculator.</property>
             <layout manager="pack" />
           </object>
         </child>
         <child>
           <object class="ttk.Label" id="label9">
-            <property name="text" translatable="yes">By Person 1 Name</property>
+            <property name="text" translatable="yes">By Tyler Haynes</property>
             <layout manager="pack" />
           </object>
         </child>
         <child>
           <object class="ttk.Label" id="label10">
-            <property name="text" translatable="yes">And Person 2 Name</property>
+            <property name="text" translatable="yes">And Cesar Altamirano</property>
             <layout manager="pack" />
           </object>
         </child>
